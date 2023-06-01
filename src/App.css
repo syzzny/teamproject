@@ -6,7 +6,22 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+@font-face {
+  font-family: 'Montserrat', sans-serif;
+  src: url(./fonts/Montserrat-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  src: url(./fonts/NotoSansKR-Bold.otf);
+}
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  src: url(./fonts/NotoSansKR-Medium.otf);
+}
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  src: url(./fonts/NotoSansKR-Regular.otf);
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
