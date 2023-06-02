@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import styled from 'styled-components';
 
 
@@ -45,8 +46,51 @@ export const TextWrap = styled.div`
     margin: 0 auto;
     text-align: initial;
 `
+
+export const styleForm = styled.form`
+    width: 360px;
+`
 export const Aglog = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
+`
+export const StyledFieldset = styled.div`
+    max-width: 360px;
+    margin: 0 auto;
+    margin-top: 32px;
+    margin-bottom: 32px;
+`
+export const StyledLabel = styled.label`
+    color: rgb(103,109,114);
+    display: block;
+    margin-bottom: 6px;
+    text-align: initial;
+    font-family: 'Noto Sans KR';
+`
+export const StyledWrapper = styled.div`
+    width: 100%;
+`
+export const StyledInput = styled(TextField)`
+    width: 360px;
+    height: 45px;
+    background-color: #F9FAFB;
+    border-radius: 5px;
+    
+    & .MuiOutlinedInput-root {
+    border: none;
+    font-size: 14px;
+    font-family: ${({ isEnglish }) => (isEnglish ? 'Montserrat' : 'Noto Sans KR')};
+    font-weight: 500;
+    height: 45px;
+    }
+    & .MuiOutlinedInput-notchedOutline {
+    border: none;
+    }
+    &:hover{
+        background-color: #f7f8fa;
+    }
+    &:focus-within {
+        border: 1px solid #000000;
+    }
 `
