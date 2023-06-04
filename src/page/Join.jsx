@@ -4,8 +4,15 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import {
     Wrap, JoinWrap, Jointext, LogoImage, TextWrap, StyledText, Aglog, Text, TextSpan, styleForm
-    , StyledInput, StyledFieldset, StyledLabel, StyledWrapper
+    , StyledInput, StyledFieldset, StyledLabel, StyledWrapper, StyledIconButton
 } from '../styles/Stylecomp'
+
+import VisibilityOffOutlined  from '@mui/icons-material/VisibilityOffOutlined';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Password, VisibilityOutlined } from '@mui/icons-material';
+import InputAdornment from '@mui/material/InputAdornment';
 
 const theme = createMuiTheme();
 
@@ -14,7 +21,9 @@ export default function Join() {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState(false);
 
-    // input 값이 변경될 때 실행
+    const [password, setPassword] = useState('');
+
+    // email
     const handleInputChange = (event) =>{
         const inputValue = event.target.value;
         const emailRegex = /^\S+@\S+\.\S+$/; // 이메일 유효성을 검사하는 정규식
@@ -31,6 +40,19 @@ export default function Join() {
         }
     };
 
+    // password
+    const handleInputPw = (event) =>{
+        const inputValue = event.target.value;
+        
+        setPassword(inputValue);
+    }
+    const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+//   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+//     event.preventDefault();
+//   };
     return (
         <ThemeProvider theme={theme}>
         <Wrap>
@@ -75,21 +97,42 @@ export default function Join() {
                         <StyledLabel>비밀번호</StyledLabel>
                         <StyledWrapper>
                             <StyledInput
-                                id='email'
+                                id='password'
+                                type = 'password'
                                 aria-invalid='false'
-                                autoComplete='username'
+                                // 새로운 비밀번호를 입력할 때는 기존에 저장된 비밀번호를 자동 완성하지 않도록 설정합니다.
+                                autoComplete='new-password'
                                 placeholder='비밀번호를 입력해주세요'
                                 inputProps={{
                                     maxLength: 60,
                                     autoComplete: 'off',
                                     }}
-                                error = {emailError}
                                 variant="outlined"
-                                helperText={emailError ? '유효한 이메일 주소를 입력해주세요' : ''}
-                                value={email}
-                                onChange={handleInputChange}
+                                value={password}
+                                onChange={handleInputPw}
+                                endAdornment = {
+                                    <InputAdornment position="end">
+                                    <StyledIconButton
+                                        aria-label='비밀번호 표시 여부 전환'
+                                        onClick={handleClickShowPassword}
+                                        // onMouseDown={(event)=>event.preventDefault()}
+                                        edge = "end"    
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </StyledIconButton>
+                                    </InputAdornment>
+                                    
+                                }
                                 >
                             </StyledInput>
+                            <StyledIconButton
+                                        aria-label='비밀번호 표시 여부 전환'
+                                        onClick={handleClickShowPassword}
+                                        // onMouseDown={(event)=>event.preventDefault()}
+                                        edge = "end"    
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </StyledIconButton>
                         </StyledWrapper>
                     </StyledFieldset>
 

@@ -1,6 +1,5 @@
-import { TextField } from '@mui/material';
+import { TextField, IconButton } from '@mui/material';
 import styled from 'styled-components';
-
 
 export const StyledText = styled.div`
     font-family: ${({ isEnglish }) => (isEnglish ? 'Montserrat' : 'Noto Sans KR')};
@@ -76,6 +75,7 @@ export const StyledInput = styled(TextField)`
     height: 45px;
     background-color: #F9FAFB;
     border-radius: 5px;
+    position: relative;
     
     & .MuiOutlinedInput-root {
     border: none;
@@ -94,3 +94,6 @@ export const StyledInput = styled(TextField)`
         border: 1px solid #000000;
     }
 `
+export const StyledIconButton = styled(IconButton)`
+  
+`;
