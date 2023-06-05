@@ -22,6 +22,23 @@
   font-family: 'Noto Sans KR', sans-serif;
   src: url(./fonts/NotoSansKR-Regular.otf);
 }
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('./fonts/SUITE-Regular.ttf')
+}
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('./fonts/SUITE-Medium.ttf');
+}
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('./fonts/SUITE-SemiBold.ttf');
+}
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('./fonts/SUITE-Bold.ttf');
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
