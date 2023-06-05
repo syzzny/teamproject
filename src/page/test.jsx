@@ -5,7 +5,7 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {
     Wrap, JoinWrap, Jointext, LogoImage, TextWrap, StyledText, Aglog, Text, TextSpan, styleForm
     , StyledInput, StyledFieldset, StyledLabel, StyledWrapper, StyledIconButton, StyledInputPw, PwButton,
-    CheckStyle, FormControlStyle, SubmitBtn
+    CheckStyle, FormControlStyle, SubmitBtn, ErrorMsg
 } from '../styles/Stylecomp'
 
 import Visibility from '@mui/icons-material/Visibility';
@@ -29,7 +29,11 @@ export default function Join() {
     const [passwordError, setPasswordError] = useState(false);
 
     const [name, setName] = useState('');
+    const [checked, setChecked] = React.useState([false, false, false]);
+    const [allChecked, setAllChecked] = React.useState(false);
+    const isAllChecked = checked[0] && checked[1] && checked[2];
 
+    
     // email
     const handleInputChange = (event) => {
         const inputValue = event.target.value;
@@ -74,6 +78,61 @@ export default function Join() {
         }
     };
 
+    const confirmPasswordErrorMessage = passwordError ? '비밀번호가 일치하지 않습니다.' : '';
+
+    // name
+    const handleInputChangeName = (event) => {
+        const inputValue = event.target.value;
+        setName(inputValue);
+    }
+
+
+    // 약관동의
+    const handleChange1 = (event) => {
+        const isChecked = event.target.checked;
+        setChecked([isChecked, isChecked, isChecked]);
+        setAllChecked(isChecked && isChecked && isChecked);
+    };
+
+    // 회원가입 버튼
+    // 모든 입력값이 채워졌을 때 버튼을 활성화하는 상태
+    const isButtonEnabled = email && password && confirmPassword && name && !emailError && !passwordError && isAllChecked;
+
+    const handleChange2 = (event) => {
+        const isChecked = event.target.checked;
+        setChecked([isChecked, checked[1], checked[2]]);
+        setAllChecked(isChecked && checked[1] && checked[2]);
+    };
+
+    const handleChange3 = (event) => {
+        const isChecked = event.target.checked;
+        setChecked([checked[0], isChecked, checked[2]]);
+        setAllChecked(checked[0] && isChecked && checked[2]);
+    };
+
+    const handleChange4 = (event) => {
+        const isChecked = event.target.checked;
+        setChecked([checked[0], checked[1], isChecked]);
+        setAllChecked(checked[0] && checked[1] && isChecked);
+    };
+
+    const children = (
+        <Box sx={{ display: 'flex', flexDirection: 'column', ml: 0 }}>
+            <FormControlLabel
+                label="[필수] 19세 이상이며, 서비스 이용약관에 동의합니다."
+                control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
+            />
+            <FormControlLabel
+                label="[필수] 개인정보 수집 및 이용에 동의합니다."
+                control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+            />
+            <FormControlLabel
+                label="[선택] 00에 관한 최근 소식, 혜택 및 서비스 관련 정보를
+                Email로 받아보겠습니다."
+                control={<Checkbox checked={checked[2]} onChange={handleChange4} />}
+            />
+        </Box>
+    );
     return (
         <ThemeProvider theme={theme}>
             <Wrap>
@@ -153,10 +212,11 @@ export default function Join() {
                                         value={confirmPassword}
                                         onChange={handleConfirmPasswordChange}
                                         error={passwordError}
-                                        helperText={passwordError ? '비밀번호가 일치하지 않습니다' : ''}
+                                        helperText={confirmPasswordErrorMessage}
                                         endAdornment={
                                             <InputAdornment position="end">
                                                 <PwButton
+                                                    id='pwbutton2'
                                                     aria-label="toggle password visibility"
                                                     onClick={handleClickShowPassword}
                                                     onMouseDown={handleMouseDownPassword}
@@ -168,9 +228,56 @@ export default function Join() {
                                         }
                                     />
                                 </FormControl>
+                                {passwordError && (
+                                    <ErrorMsg>비밀번호가 일치하지 않습니다.</ErrorMsg>
+                                )}
                             </StyledWrapper>
                         </StyledFieldset>
 
+                        {/* 이름 */}
+                        <StyledFieldset>
+                            <StyledLabel>이름</StyledLabel>
+                            <StyledWrapper>
+                                <StyledInput
+                                    id='name'
+                                    aria-invalid='false'
+                                    autoComplete='username'
+                                    placeholder='이름을 입력해주세요'
+                                    inputProps={{
+                                        maxLength: 60,
+                                        autoComplete: 'off',
+                                    }}
+                                    variant="outlined"
+                                    value={name}
+                                    onChange={handleInputChangeName}
+                                >
+                                </StyledInput>
+                            </StyledWrapper>
+                        </StyledFieldset>
+
+                        {/* 약관동의 */}
+                        <StyledFieldset>
+                            <StyledLabel>약관동의</StyledLabel>
+                            <StyledWrapper>
+                                <CheckStyle>
+                                    <FormControlStyle
+                                        label="전체동의"
+                                        control={
+                                            <Checkbox
+                                                checked={isAllChecked}
+                                                onChange={handleChange1}
+                                            />
+                                        }
+                                    />
+                                    {children}
+                                </CheckStyle>
+                            </StyledWrapper>
+                        </StyledFieldset>
+
+                        <SubmitBtn
+                            disabled={!isButtonEnabled}>
+                            회원가입
+                        </SubmitBtn>
                     </styleForm>
                 </Jointext>
             </Wrap>

@@ -24,6 +24,7 @@ export const TextSpan = styled.span`
 export const Wrap = styled.div`
     display: flex;
     height: 100vh;
+    overflow: hidden;
 `
 export const JoinWrap = styled.img`
     /* flex: 1.3 1 auto; */
@@ -32,8 +33,10 @@ export const JoinWrap = styled.img`
     height: 100%;
 `
 export const Jointext = styled.div`
-    flex: 1;
-    padding: 82px 0;
+    flex-grow: 1; /** 남은 공간을 차지 */
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
 `
 export const LogoImage = styled.img`
     width: 110px;
@@ -41,7 +44,7 @@ export const LogoImage = styled.img`
 export const TextWrap = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 35px;
+    gap: 32px;
     width: 100%;
     max-width: 360px;
     margin: 0 auto;
@@ -50,17 +53,20 @@ export const TextWrap = styled.div`
 
 export const styleForm = styled.form`
     width: 360px;
+    height: 100%;
+    display: flex;
+  flex-direction: column; /* 내부 요소들을 수직으로 정렬 */
 `
 export const Aglog = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 19px;
+    gap: 16px;
 `
 export const StyledFieldset = styled.div`
     max-width: 360px;
     margin: 0 auto;
-    margin-top: 35px;
-    margin-bottom: 35px;
+    margin-top: 32px;
+    margin-bottom: 32px;
 `
 export const StyledLabel = styled.label`
     color: rgb(103,109,114);
@@ -134,7 +140,7 @@ export const PwButton = styled(IconButton)`
     & .css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root:hover{
         background-color: transparent !important;
     }
-` 
+`
 export const ErrorMsg = styled.div`
     color: #d32f2f;
     font-family: "Roboto","Helvetica","Arial",sans-serif;
@@ -192,4 +198,17 @@ export const SubmitBtn = styled.button`
     font-size: 16px;
     font-weight: 300;
     border-radius: 5px;
+
+   /* 활성화된 버튼 스타일 */
+    ${({ enabled }) => enabled && `
+    /* 활성화된 버튼에 대한 스타일 */
+    background-color: #000;
+    cursor : pointer;
+    `}
+
+  /* 비활성화된 버튼 스타일 */
+    ${({ enabled }) => !enabled && `
+    /* 비활성화된 버튼에 대한 스타일 */
+    background-color: #C2C4C7;
+    `}
 `

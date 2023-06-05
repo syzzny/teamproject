@@ -29,6 +29,10 @@ export default function Join() {
     const [passwordError, setPasswordError] = useState(false);
 
     const [name, setName] = useState('');
+    const [checked, setChecked] = React.useState([false, false, false]);
+    const [allChecked, setAllChecked] = React.useState(false);
+    const isAllChecked = checked[0] && checked[1] && checked[2];
+
 
     // email
     const handleInputChange = (event) => {
@@ -84,15 +88,12 @@ export default function Join() {
 
 
     // 약관동의
-    const [checked, setChecked] = React.useState([false, false, false]);
+    
 
     const handleChange1 = (event) => {
         const isChecked = event.target.checked;
-        if (isChecked) {
-            setChecked([true, true, true]);
-        } else {
-            setChecked([false, false, false]);
-        }
+        setChecked([isChecked, isChecked, isChecked]);
+        setAllChecked(isChecked && isChecked && isChecked);
     };
 
     // 회원가입 버튼
@@ -103,19 +104,22 @@ export default function Join() {
     const handleChange2 = (event) => {
         const isChecked = event.target.checked;
         setChecked([isChecked, checked[1], checked[2]]);
+        setAllChecked(isChecked && checked[1] && checked[2]);
     };
 
     const handleChange3 = (event) => {
         const isChecked = event.target.checked;
         setChecked([checked[0], isChecked, checked[2]]);
+        setAllChecked(checked[0] && isChecked && checked[2]);
     };
 
     const handleChange4 = (event) => {
         const isChecked = event.target.checked;
         setChecked([checked[0], checked[1], isChecked]);
+        setAllChecked(checked[0] && checked[1] && isChecked);
     };
 
-    const isAllChecked = checked[0] && checked[1] && checked[2];
+    
 
 
     const children = (
@@ -277,7 +281,7 @@ export default function Join() {
                         </StyledFieldset>
 
                         <SubmitBtn
-                            disabled={!isButtonEnabled}>
+                            enabled={isButtonEnabled}>
                             회원가입
                         </SubmitBtn>
                     </styleForm>
