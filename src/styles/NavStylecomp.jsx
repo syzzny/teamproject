@@ -33,11 +33,38 @@ export const MenuStyle = styled.div`
     justify-content: space-between;
     height: 100%;
     margin-left: 70px;
+    font-size: 17px;
+`
+export const SubItems = styled.div`
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 164px;
+    padding: 24px;
+    background-color: #fff;
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 8px;
+    font-size: 18px;
+    line-height: 26px;
+    box-shadow: 0 4px 60px rgba(0,0,0,.1);
+`
+export const SubLink = styled.a`
+    display: flex;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: #000;
+    font-weight: 700;
 `
 export const MenuItems = styled.div`
     display: flex;
     align-items: center;
     height: 100%;
+    & :hover{
+        color: #3067ec;
+        cursor: pointer;
+    }
 `
 export const MenuUtil = styled.div`
     display: flex;
@@ -50,13 +77,11 @@ export const MenuItems_item = styled.div`
 export const MenuItems_item_slide = styled.div`
     margin-left: 23px;
     padding: 0 8px;
-    & ::after{
-        content: "";
-        display: inline-flex;
-        width: 24px;
-        height: 24px;
-        background: url(./assets/img/icon-arrow-down.png) no-repeat 100%;
-        font-size: 18px
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    &:hover ${SubItems} {
+        display: block;
     }
 `
 export const ProfileImg = styled.img`
